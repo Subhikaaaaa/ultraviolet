@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoThrift - Sustainable Fashion Marketplace</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">EcoThrift</div>
+        <div class="nav-links">
+            <a href="#" class="active">Home</a>
+            <a href="#marketplace">Marketplace</a>
+            <a href="#blog">Blog</a>
+            <a href="#donate">Donate</a>
+            <button onclick="toggleChatbot()" class="chatbot-toggle">Chat</button>
+        </div>
+        <div class="user-actions">
+            <div class="cart-widget">
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </button>
+                <span id="cart-total">₹0</span>
+            </div>
+            <button class="wishlist-btn"><i class="fas fa-heart"></i></button>
+            <button class="login-btn">Login</button>
+            <button class="sell-btn">Sell Item</button>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <h1>Sustainable Fashion for a Better Future</h1>
+            <p>Buy, Sell, and Upcycle Second-hand Fashion</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for sustainable fashion...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+        </section>
+
+        <section id="categories" class="categories">
+            <h2>Shop by Category</h2>
+            <div class="category-grid">
+                <div class="category-card" data-category="men">
+                    <i class="fas fa-male"></i>
+                    <h3>Men</h3>
+                </div>
+                <div class="category-card" data-category="women">
+                    <i class="fas fa-female"></i>
+                    <h3>Women</h3>
+                </div>
+                <div class="category-card" data-category="kids">
+                    <i class="fas fa-child"></i>
+                    <h3>Kids</h3>
+                </div>
+                <div class="category-card" data-category="accessories">
+                    <i class="fas fa-glasses"></i>
+                    <h3>Accessories</h3>
+                </div>
+                <div class="category-card" data-category="footwear">
+                    <i class="fas fa-shoe-prints"></i>
+                    <h3>Footwear</h3>
+                </div>
+            </div>
+        </section>
+
+        <section id="marketplace" class="marketplace">
+            <h2>Featured Items</h2>
+            <div class="filters">
+                <select id="condition-filter">
+                    <option value="">Condition</option>
+                    <option value="like-new">Like New</option>
+                    <option value="gently-used">Gently Used</option>
+                    <option value="vintage">Vintage</option>
+                </select>
+                <select id="sustainability-filter">
+                    <option value="">Sustainability Rating</option>
+                    <option value="high">High Impact</option>
+                    <option value="medium">Medium Impact</option>
+                    <option value="low">Low Impact</option>
+                </select>
+            </div>
+            <div class="product-grid" id="product-grid">
+                <!-- Products will be dynamically loaded here -->
+            </div>
+        </section>
+
+        <section id="donate" class="donate-section">
+            <h2>Make a Difference: Donate Clothes</h2>
+            <div class="donation-form">
+                <div class="form-group">
+                    <label for="item-condition">Item Condition</label>
+                    <select id="item-condition" class="form-control" required>
+                        <option value="">Select Condition</option>
+                        <option value="like-new">Like New (Barely Used)</option>
+                        <option value="gently-used">Gently Used (Minor Wear)</option>
+                        <option value="vintage">Vintage (Aged with Character)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of Items</label>
+                    <div class="item-counter">
+                        <button type="button" id="decrease-items">-</button>
+                        <span id="item-count">1</span>
+                        <button type="button" id="increase-items">+</button>
+                    </div>
+                </div>
+                <button type="button" id="donate-btn" class="btn">Donate Now</button>
+            </div>
+        </section>
+
+        <section id="showcase" class="showcase">
+            <h2>Transformation Showcase</h2>
+            <div class="showcase-tips">
+                <h3>Tips for Great Transformations:</h3>
+                <ul>
+                    <li>Take clear, well-lit photos from the same angle for before and after shots</li>
+                    <li>Include close-up details of any repairs or modifications</li>
+                    <li>Share specific techniques and materials used</li>
+                    <li>Tell the story behind the transformation</li>
+                    <li>Add measurements or size details if relevant</li>
+                </ul>
+            </div>
+            <button id="open-showcase-form" class="btn">Share Your Transformation</button>
+            <div id="showcase-grid" class="showcase-grid"></div>
+        </section>
+    </main>
+
+    <!-- Showcase Modal -->
+    <div id="showcase-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Share Your Transformation</h2>
+            <form id="showcase-form">
+                <div class="form-group">
+                    <label for="showcase-title">Title</label>
+                    <input type="text" id="showcase-title" placeholder="E.g., Vintage Denim Jacket Makeover" required>
+                </div>
+                <div class="form-group">
+                    <label for="before-image">Before Image</label>
+                    <input type="file" id="before-image" accept="image/*" required>
+                    <small>Tip: Use good lighting and a clear background</small>
+                </div>
+                <div class="form-group">
+                    <label for="after-image">After Image</label>
+                    <input type="file" id="after-image" accept="image/*" required>
+                    <small>Tip: Take the photo from the same angle as the before image</small>
+                </div>
+                <div class="form-group">
+                    <label for="transformation-story">Your Transformation Story</label>
+                    <textarea id="transformation-story" placeholder="Share what inspired you and how you transformed the item..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tips">Tips for Others</label>
+                    <textarea id="tips" placeholder="Share your techniques, materials used, and helpful advice..." required></textarea>
+                </div>
+                <button type="submit" class="btn">Share Your Story</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="chatbot-popup" class="chatbot-popup">
+        <div class="chatbot-header">
+            <h2>AI Chatbot Assistant</h2>
+            <button onclick="toggleChatbot()">X</button>
+        </div>
+        <div id="chatbot-questions">
+            <p id="question"></p>
+        </div>
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About EcoThrift</h3>
+                <p>Promoting sustainable fashion through second-hand clothing and conscious consumption.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#marketplace">Shop</a>
+                <a href="#blog">Blog</a>
+                <a href="#donate">Donate</a>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="chatbot.js"></script>
+</body>
+</html>
